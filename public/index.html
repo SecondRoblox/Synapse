@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roblox Headshot Finder</title>
+    <title>Username to Thumbnail</title>
     <style>
         /* Styling for the intro screen */
         #intro {
@@ -91,11 +91,6 @@
             margin-top: 20px;
             border-radius: 50%;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s ease;
-        }
-
-        img:hover {
-            transform: rotate(360deg);
         }
 
         #result p {
@@ -126,22 +121,6 @@
                 font-size: 16px;
             }
         }
-
-        /* Footer styling */
-        footer {
-            margin-top: 40px;
-            padding: 10px;
-            font-size: 0.9em;
-        }
-
-        footer a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
@@ -149,7 +128,7 @@
     <!-- Intro screen -->
     <div id="intro">A Synapse Studios Project</div>
 
-    <h1>Roblox Headshot Finder</h1>
+    <h1>Avatar Lens</h1>
     <p>Enter your Roblox username below to get your headshot:</p>
 
     <input type="text" id="username" placeholder="Roblox Username">
@@ -163,7 +142,7 @@
             const resultDiv = document.getElementById('result');
 
             if (username) {
-                const apiUrl = `/api/headshot?username=${username}`;
+                const apiUrl = `/api/headshot?username=${encodeURIComponent(username)}`;
 
                 fetch(apiUrl)
                     .then(response => response.json())
@@ -171,7 +150,7 @@
                         if (data.headshotUrl) {
                             resultDiv.innerHTML = `<img src="${data.headshotUrl}" alt="Roblox Headshot" width="150" height="150">`;
                         } else {
-                            resultDiv.innerHTML = `<p>Headshot not found. Please check the username.</p>`;
+                            resultDiv.innerHTML = `<p>Username not found.</p>`;
                         }
                     })
                     .catch(error => {
@@ -183,10 +162,6 @@
             }
         }
     </script>
-
-    <footer>
-        <p>Check out the <a href="http://synapsestudios.hstn.me/?i=1" target="_blank">API</a>!</p>
-    </footer>
 
 </body>
 </html>
