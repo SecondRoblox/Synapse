@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Headshot Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        img {
+            margin-top: 20px;
+            border-radius: 50%;
+        }
+        #result p {
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Roblox Headshot Finder</h1>
+    <p>Enter your Roblox username below to get your headshot:</p>
+
+    <input type="text" id="username" placeholder="Roblox Username">
+    <button onclick="getHeadshot()">Get Headshot</button>
+
+    <div id="result"></div>
+
+    <script>
+        function getHeadshot() {
+            const username = document.getElementById('username').value;
+            const resultDiv = document.getElementById('result');
+
+            if (username) {
+                const apiUrl = `/api/headshot?username=${username}`;
+
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.headshotUrl) {
+                            resultDiv.innerHTML = `<img src="${data.headshotUrl}" alt="Roblox Headshot" width="150" height="150">`;
+                        } else {
+                            resultDiv.innerHTML = `<p>Headshot not found. Please check the username.</p>`;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching data:', error);
+                        resultDiv.innerHTML = `<p>Error fetching headshot. Please try again later.</p>`;
+                    });
+            } else {
+                resultDiv.innerHTML = `<p>Please enter a username.</p>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
