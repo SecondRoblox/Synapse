@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Username to Thumbnail</title>
+    <title>RoShot</title>
     <style>
         /* Styling for the intro screen */
         #intro {
@@ -99,6 +99,32 @@
             margin-top: 20px;
         }
 
+        /* Links for API and Status Page */
+        .link-container {
+            margin-top: 40px;
+        }
+
+        .link-container a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .link-container a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .link-container a:active {
+            background-color: #004085;
+        }
+
         /* Keyframes for animations */
         @keyframes slideIn {
             0% {
@@ -128,13 +154,18 @@
     <!-- Intro screen -->
     <div id="intro">A Synapse Studios Project</div>
 
-    <h1>Avatar Lens</h1>
-    <p>Enter your Roblox username below to get your headshot:</p>
+    <h1>RoSHot</h1>
+    <p>Enter your Roblox username below to get your avatar thumbnail:</p>
 
     <input type="text" id="username" placeholder="Roblox Username">
     <button onclick="getHeadshot()">Get Headshot</button>
 
     <div id="result"></div>
+
+    <div class="link-container">
+        <a href="http://synapsestudios.hstn.me/?i=1" target="_blank">View the API</a>
+        <a href="https://synapse.cronitorstatus.com/" target="_blank">Status Page</a>
+    </div>
 
     <script>
         function getHeadshot() {
